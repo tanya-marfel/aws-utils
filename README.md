@@ -1,25 +1,29 @@
-## BMI Calculator
+# Launch guide
 
-[![Build Status](https://travis-ci.com/GermaVinsmoke/bmi-calculator.svg?branch=master)](https://travis-ci.com/GermaVinsmoke/bmi-calculator)
-[![Coverage Status](https://coveralls.io/repos/github/GermaVinsmoke/bmi-calculator/badge.svg?branch=master)](https://coveralls.io/github/GermaVinsmoke/bmi-calculator?branch=master)
-[![codecov](https://codecov.io/gh/GermaVinsmoke/bmi-calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/GermaVinsmoke/bmi-calculator)
+## sync_with_bucket.sh
+This script listens to the changes in the specified directory and sends them to S3. You can start it as follows
+```
+bash sync_with_bucket.sh -p administrator -b subtask1-console -f build
+```
+where -p is AWS profile to use, -b is the name of the bucket and -f is the folder name to watch
 
-React Hooks app to calculate the BMI of a person. It can store the data for 7 days with the help of LocalStorage.
+## list_bucket_files.sh
+Lists the bucket files into csv file, e.g. 
+```
+bash list_bucket_files.sh -p administrator -b subtask1-console -f test
+```
+where -p is AWS profile to use, -b is the name of the bucket and -f is the csv file name
 
-![](images/1.jpg)
+## get_latest_versions.sh
+Downloads most recent versions of the files in the bucket
+```
+bash get_latest_version.sh -p administrator -b subtask1-console
+```
+where -p is AWS profile to use, -b is the name of the bucket
 
-Created with _create-react-app_. See the [full create-react-app guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
-
-## Install
-
-`npm install`
-
-## Usage
-
-`npm start`
-
-## Enhancement
-
-1. Removing the dependency of Materialize-CSS module
-
-~~2. Chart going crazy on hovering over the old points~~
+## get_by_date.sh
+Downloads all the files from the bucket modified on the specified date, e.g. 
+```
+get_by_date.sh -p administrator -b subtask1-console -d 2020-09-28
+```
+where -p is AWS profile to use, -b is the name of the bucket and -d is the date to compare against. The format is YYYY-MM-DD.
